@@ -26,7 +26,7 @@ for i in range(len(num_of_accounts)):
 
 for i,j in accounts_and_balances.items():
     payment = float(input(f"You owe {j} on account {i}. How much do you want to pay?\nEnter your answer in dollars and cents: "))
-    new_balance = round(balance_in_checking - payment,2)
+    new_balance = round(balance_in_checking - payment,2) #TODO: you done messed up son
     account_balance = round(j - payment,2)
     print(bcolors.OKBLUE + f'Your new checking balance is: {new_balance}\nYour balance on account {i} is: {account_balance}' + bcolors.ENDC)
     print("And we Continue...")
