@@ -18,10 +18,12 @@ try:
     balance_in_checking = float(input("How much money do we have to work with? (Usually the money in your checking)\nAnswer in dollars and cents: "))
 except:
     print(bcolors.FAIL + 'ERROR. YOU MUST ENTER THE VALUE IN DOLLARS AND CENTS.' + bcolors.ENDC)
+    print("Please run the program again.")
 try:
     accounts_to_pay = int(input("How many accounts do you have to pay today? "))
 except:
     print(bcolors.FAIL + 'ERROR. THIS VALUE MUST BE AN INTEGER' + bcolors.ENDC)
+    print("Please run the program again.")
 
 num_of_accounts = accounts_to_pay*count
 
