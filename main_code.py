@@ -11,12 +11,19 @@ class bcolors:
     ENDC      = '\033[0m'
 
 ticker = 0
-counter = '1'
+count = '1'
 accounts_and_balances = {}
 
-balance_in_checking = float(input("How much money do we have to work with? (Usually the money in your checking)\nAnswer in dollars and cents: "))
-accounts_to_pay = int(input("How many accounts do you have to pay today? "))
-num_of_accounts = accounts_to_pay*counter
+try:
+    balance_in_checking = float(input("How much money do we have to work with? (Usually the money in your checking)\nAnswer in dollars and cents: "))
+except:
+    print(bcolors.FAIL + 'ERROR. YOU MUST ENTER THE VALUE IN DOLLARS AND CENTS.' + bcolors.ENDC)
+try:
+    accounts_to_pay = int(input("How many accounts do you have to pay today? "))
+except:
+    print(bcolors.FAIL + 'ERROR. THIS VALUE MUST BE AN INTEGER' + bcolors.ENDC)
+
+num_of_accounts = accounts_to_pay*count
 
 for i in range(len(num_of_accounts)):
     ticker += 1
@@ -25,10 +32,11 @@ for i in range(len(num_of_accounts)):
     accounts_and_balances[names] = balances
 
 for i,j in accounts_and_balances.items():
-    payment = float(input(f"You owe {j} on account {i}. How much do you want to pay?\nEnter your answer in dollars and cents: "))
+    print('You owe: ' + bcolors.BOLD + f'${j}' + bcolors.ENDC + ' on account: ' + bcolors.BOLD + f'{i}' + bcolors.ENDC)
+    payment = float(input('How much would you like to pay? '))
     balance_in_checking -= round(payment, 2)
     account_balance = round(j - payment,2)
-    print(bcolors.OKBLUE + f'Your new checking balance is: {balance_in_checking}\nYour balance on account {i} is: {account_balance}' + bcolors.ENDC)
+    print(bcolors.OKBLUE + f'Your new checking balance will be: {round(balance_in_checking,2)}\nYour balance on account {i} will be: {account_balance}' + bcolors.ENDC)
     print("And we Continue...")
 
 print("Thank you for using Eli Pachecos " + bcolors.HEADER + "BALANCE YOUR LIFE" + bcolors.ENDC + " program\nPlease use again next month!")
