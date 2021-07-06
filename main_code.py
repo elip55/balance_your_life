@@ -1,14 +1,6 @@
 
-# color options
-class bcolors:
-    HEADER    = '\033[95m'
-    OKBLUE    = '\033[94m'
-    OKGREEN   = '\033[92m'
-    WARNING   = '\033[93m'
-    FAIL      = '\033[91m'
-    BOLD      = '\033[1m'
-    UNDERLINE = '\033[4m'
-    ENDC      = '\033[0m'
+from src.colors import bcolors
+from src.calculator import Calculator
 
 ticker = 0
 count = '1'
@@ -33,11 +25,16 @@ for i in range(len(num_of_accounts)):
     balances = float(input(f"Please enter the balance of {names}, in dollars and cents "))
     accounts_and_balances[names] = balances
 
+print("Okay, to recap, here's what your accounts look like:")
+for i,j in accounts_and_balances.items():
+    print(bcolors.BOLD + f'{i}: {j}' + bcolors.ENDC)
+
 for i,j in accounts_and_balances.items():
     print('You owe: ' + bcolors.BOLD + f'${j}' + bcolors.ENDC + ' on account: ' + bcolors.BOLD + f'{i}' + bcolors.ENDC)
     payment = float(input('How much would you like to pay? '))
     balance_in_checking -= round(payment, 2)
-    account_balance = round(j - payment,2)
+    minus = Calculator(j, payment)
+    account_balance = minus.subtract()
     print(bcolors.OKBLUE + f'Your new checking balance will be: {round(balance_in_checking,2)}\nYour balance on account {i} will be: {account_balance}' + bcolors.ENDC)
     print("And we Continue...")
 
