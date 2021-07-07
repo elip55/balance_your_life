@@ -25,9 +25,11 @@ for i in range(len(num_of_accounts)):
     balances = float(input(f"Please enter the balance of {names}, in dollars and cents "))
     accounts_and_balances[names] = balances
 
+sum_of_accounts = sum(accounts_and_balances.values())
 print("Okay, to recap, here's what your accounts look like:")
 for i,j in accounts_and_balances.items():
     print(bcolors.BOLD + f'{i}: {j}' + bcolors.ENDC)
+print(bcolors.BOLD + f'TOTAL AMOUNT OWED: {sum_of_accounts}' + bcolors.ENDC)
 
 for i,j in accounts_and_balances.items():
     print('You owe: ' + bcolors.BOLD + f'${j}' + bcolors.ENDC + ' on account: ' + bcolors.BOLD + f'{i}' + bcolors.ENDC)
