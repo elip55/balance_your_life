@@ -39,7 +39,7 @@ def dictionary_work():
         ticker += 1
         names = str(input(f'Please name account {ticker} '))
         balances = float(input(f"Please enter the balance of {names}, in dollars and cents "))
-        accounts_and_balances[names] = balances
+        accounts_and_balances[names] = round(balances,2)
 
     sum_of_accounts = round(sum(accounts_and_balances.values()),2)
     print("Okay, to recap, here's what your accounts look like:")
@@ -48,9 +48,9 @@ def dictionary_work():
     print(bcolors.BOLD + f'TOTAL AMOUNT OWED: {sum_of_accounts}' + bcolors.ENDC)
 
     for i,j in accounts_and_balances.items():
-        print('You owe: ' + bcolors.BOLD + f'${j}' + bcolors.ENDC + ' on account: ' + bcolors.BOLD + f'{i}' + bcolors.ENDC)
+        print('You owe: ' + bcolors.BOLD + f'${round(j,2)}' + bcolors.ENDC + ' on account: ' + bcolors.BOLD + f'{i}' + bcolors.ENDC)
         payment = float(input('How much would you like to pay? '))
-        balance_in_checking -= round(payment, 2)
+        balance_in_checking -= payment
         minus = Calculator(j, payment)
         account_balance = minus.subtract()
         print(bcolors.OKBLUE + f'Your new checking balance will be: {round(balance_in_checking,2)}\nYour balance on account {i} will be: {account_balance}' + bcolors.ENDC)
