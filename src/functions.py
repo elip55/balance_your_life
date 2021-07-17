@@ -34,6 +34,8 @@ def dictionary_work():
     accounts_and_balances = {}
     # use length counter to create a length for the loop (1*n)
     num_of_accounts = accounts_to_pay*length_counter
+    # start the summary string for csv file creation
+    summary_string = "ACCOUNT, PAYMENT, FINAL BALANCE\n"
 
     for i in range(len(num_of_accounts)):
         ticker += 1
@@ -42,10 +44,11 @@ def dictionary_work():
         accounts_and_balances[names] = round(balances,2)
 
     sum_of_accounts = round(sum(accounts_and_balances.values()),2)
-    print("Okay, to recap, here's what your accounts look like:")
+    print(bcolors.BOLD + "Okay, to recap, here's what your accounts look like:" + bcolors.ENDC)
+    print(bcolors.BOLD + "-----------------------------------------------------" + bcolors.ENDC)
     for i,j in accounts_and_balances.items():
         print(bcolors.BOLD + f'{i}: {j}' + bcolors.ENDC)
-    print(bcolors.BOLD + f'TOTAL AMOUNT OWED: {sum_of_accounts}' + bcolors.ENDC)
+    print(bcolors.BOLD + f'--------------------------\nTOTAL AMOUNT OWED: {sum_of_accounts}' + bcolors.ENDC)
 
     for i,j in accounts_and_balances.items():
         print('You owe: ' + bcolors.BOLD + f'${round(j,2)}' + bcolors.ENDC + ' on account: ' + bcolors.BOLD + f'{i}' + bcolors.ENDC)
@@ -55,3 +58,10 @@ def dictionary_work():
         account_balance = minus.subtract()
         print(bcolors.OKBLUE + f'Your new checking balance will be: {round(balance_in_checking,2)}\nYour balance on account {i} will be: {account_balance}' + bcolors.ENDC)
         print("And we Continue...")
+        summary_string += f'{i},{payment},{account_balance}\n'
+    answr = input("Would you like to create a CSV file of account payments for your records? y/n: ")
+    if answr == 'y' or answr == ' y':
+        with open('payments.csv', 'w') as writer:
+            writer.write(summary_string)
+    if answr == 'n' or answr == ' n':
+        pass
