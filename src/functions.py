@@ -16,13 +16,13 @@ def questions():
     try:
         balance_in_checking = float(input("How much money do we have to work with? (Usually the money in your checking)\nAnswer in dollars and cents: "))
     except:
-        print(bcolors.FAIL + 'ERROR. YOU MUST ENTER THE VALUE IN DOLLARS AND CENTS.' + bcolors.ENDC)
-        print("Please run the program again.")
+        print(bcolors.FAIL + 'ERROR. YOU MUST ENTER THE VALUE IN DOLLARS AND CENTS.\nPLEASE RE-RUN THE PROGRAM' + bcolors.ENDC)
+        exit()
     try:
         accounts_to_pay = int(input("How many accounts do you have to pay today? "))
     except:
-        print(bcolors.FAIL + 'ERROR. THIS VALUE MUST BE AN INTEGER' + bcolors.ENDC)
-        print("Please run the program again.")
+        print(bcolors.FAIL + 'ERROR. YOU MUST ENTER AN INTEGER.\nPLEASE RE-RUN THE PROGRAM' + bcolors.ENDC)
+        exit()
 
 def dictionary_work():
     # calling the global variables
@@ -30,28 +30,54 @@ def dictionary_work():
     global accounts_to_pay
     global length_counter
     global ticker
-    # initiate the dictionary
+    # initiate the dictionaries
     accounts_and_balances = {}
+    accounts_min_payments = {}
     # use length counter to create a length for the loop (1*n)
     num_of_accounts = accounts_to_pay*length_counter
+    # start the summary string for csv file creation
+    summary_string = "ACCOUNT, PAYMENT, FINAL BALANCE\n"
 
     for i in range(len(num_of_accounts)):
         ticker += 1
         names = str(input(f'Please name account {ticker} '))
-        balances = float(input(f"Please enter the balance of {names}, in dollars and cents "))
-        accounts_and_balances[names] = round(balances,2)
+        try:
+            balances = float(input(f"Please enter the " + bcolors.BOLD + "balance" + bcolors.ENDC +  f" of " + bcolors.BOLD + f'{names}' + bcolors.ENDC + " in dollars and cents: "))
+        except:
+            print(bcolors.FAIL + "INVALID INPUT.\nPLEASE RE-RUN THE PROGRAM" + bcolors.ENDC)
+            exit()
+        try:
+            min_payment = float(input(f"What is the " + bcolors.BOLD + "minimum amount owed" + bcolors.ENDC + f" on account: " + bcolors.BOLD +  f'{names} ' + bcolors.ENDC))
+        except:
+            print(bcolors.FAIL + "INVALID INPUT.\nPLEASE RE-RUN THE PROGRAM" + bcolors.ENDC)
+            exit()
+        
+        accounts_and_balances[names] = balances
+        accounts_min_payments[names] = min_payment
 
     sum_of_accounts = round(sum(accounts_and_balances.values()),2)
-    print("Okay, to recap, here's what your accounts look like:")
+    sum_of_min_payments = round(sum(accounts_min_payments.values()))
+    print(bcolors.BOLD + "Okay, to recap, here's what your accounts look like:" + bcolors.ENDC)
+    print(bcolors.BOLD + "-----------------------------------------------------" + bcolors.ENDC)
     for i,j in accounts_and_balances.items():
         print(bcolors.BOLD + f'{i}: {j}' + bcolors.ENDC)
-    print(bcolors.BOLD + f'TOTAL AMOUNT OWED: {sum_of_accounts}' + bcolors.ENDC)
-
+    print(bcolors.BOLD + f'--------------------------\nTOTAL AMOUNT OWED: {sum_of_accounts}' + bcolors.ENDC)
+    print(bcolors.BOLD + f'TOTAL AMOUNT OF MIN PAYMENTS: {sum_of_min_payments}' + bcolors.ENDC)
     for i,j in accounts_and_balances.items():
         print('You owe: ' + bcolors.BOLD + f'${round(j,2)}' + bcolors.ENDC + ' on account: ' + bcolors.BOLD + f'{i}' + bcolors.ENDC)
-        payment = float(input('How much would you like to pay? '))
+        try:
+            payment = float(input('How much would you like to pay? '))
+        except: 
+            print(bcolors.FAIL + "INVALID INPUT, PLEASE RE-RUN THE PROGRAM" + bcolors.ENDC)
         balance_in_checking -= payment
         minus = Calculator(j, payment)
         account_balance = minus.subtract()
         print(bcolors.OKBLUE + f'Your new checking balance will be: {round(balance_in_checking,2)}\nYour balance on account {i} will be: {account_balance}' + bcolors.ENDC)
         print("And we Continue...")
+        summary_string += f'{i},{payment},{account_balance}\n'
+    answr = input("Would you like to create a CSV file of account payments for your records? y/n: ")
+    if answr == 'y' or answr == ' y':
+        with open('payments.csv', 'w') as writer:
+            writer.write(summary_string)
+    if answr == 'n' or answr == ' n':
+        pass
