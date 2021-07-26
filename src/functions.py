@@ -61,6 +61,8 @@ def dictionary_work():
     print(bcolors.BOLD + "-----------------------------------------------------" + bcolors.ENDC)
     for i,j in accounts_and_balances.items():
         print(bcolors.BOLD + f'{i}: {j}' + bcolors.ENDC)
+    for i, j in accounts_min_payments.items():
+        print(bcolors.BOLD + f'{i} | min payment: {j}' + bcolors.ENDC)
     print(bcolors.BOLD + f'--------------------------\nTOTAL AMOUNT OWED: {sum_of_accounts}' + bcolors.ENDC)
     print(bcolors.BOLD + f'TOTAL AMOUNT OF MIN PAYMENTS: {sum_of_min_payments}' + bcolors.ENDC)
     for i,j in accounts_and_balances.items():
@@ -75,6 +77,7 @@ def dictionary_work():
         print(bcolors.OKBLUE + f'Your new checking balance will be: {round(balance_in_checking,2)}\nYour balance on account {i} will be: {account_balance}' + bcolors.ENDC)
         print("And we Continue...")
         summary_string += f'{i},{payment},{account_balance}\n'
+    summary_string += f'Checking, -, {balance_in_checking}'
     answr = input("Would you like to create a CSV file of account payments for your records? y/n: ")
     if answr == 'y' or answr == ' y':
         with open('payments.csv', 'w') as writer:
