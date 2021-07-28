@@ -57,6 +57,10 @@ def dictionary_work():
 
     sum_of_accounts = round(sum(accounts_and_balances.values()),2)
     sum_of_min_payments = round(sum(accounts_min_payments.values()))
+    sub1 = Calculator(balance_in_checking, sum_of_accounts)
+    if_payed_in_full = sub1.subtract()
+    sub2 = Calculator(balance_in_checking, sum_of_min_payments)
+    if_payed_min = sub2.subtract()
     print(bcolors.BOLD + "Okay, to recap, here's what your accounts look like:" + bcolors.ENDC)
     print(bcolors.BOLD + "-----------------------------------------------------" + bcolors.ENDC)
     for i,j in accounts_and_balances.items():
@@ -64,7 +68,9 @@ def dictionary_work():
     for i, j in accounts_min_payments.items():
         print(bcolors.BOLD + f'{i} | min payment: {j}' + bcolors.ENDC)
     print(bcolors.BOLD + f'--------------------------\nTOTAL AMOUNT OWED: {sum_of_accounts}' + bcolors.ENDC)
-    print(bcolors.BOLD + f'TOTAL AMOUNT OF MIN PAYMENTS: {sum_of_min_payments}' + bcolors.ENDC)
+    print(bcolors.BOLD + f'TOTAL AMOUNT OF MIN PAYMENTS: {sum_of_min_payments}\n' + bcolors.ENDC)
+    print('If you payed the total amount, your account would have a final balance of: ' + bcolors.BOLD + f'{if_payed_in_full}' + bcolors.ENDC)
+    print('If you payed ' + bcolors.BOLD + 'ONLY ' + bcolors.ENDC + 'The minimum amount, your account would have a final balance of: ' + bcolors.BOLD + f'{if_payed_min}' + bcolors.ENDC)
     for i,j in accounts_and_balances.items():
         print('You owe: ' + bcolors.BOLD + f'${round(j,2)}' + bcolors.ENDC + ' on account: ' + bcolors.BOLD + f'{i}' + bcolors.ENDC)
         try:
@@ -72,8 +78,8 @@ def dictionary_work():
         except: 
             print(bcolors.FAIL + "INVALID INPUT, PLEASE RE-RUN THE PROGRAM" + bcolors.ENDC)
         balance_in_checking -= payment
-        minus = Calculator(j, payment)
-        account_balance = minus.subtract()
+        sub3 = Calculator(j, payment)
+        account_balance = sub3.subtract()
         print(bcolors.OKBLUE + f'Your new checking balance will be: {round(balance_in_checking,2)}\nYour balance on account {i} will be: {account_balance}' + bcolors.ENDC)
         print("And we Continue...")
         summary_string += f'{i},{payment},{account_balance}\n'
