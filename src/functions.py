@@ -13,16 +13,18 @@ ticker = 0
 def questions():
     global balance_in_checking
     global accounts_to_pay
-    try:
-        balance_in_checking = float(input("How much money do we have to work with? (Usually the money in your checking)\nAnswer in dollars and cents: "))
-    except:
-        print(bcolors.FAIL + 'ERROR. YOU MUST ENTER THE VALUE IN DOLLARS AND CENTS.\nPLEASE RE-RUN THE PROGRAM' + bcolors.ENDC)
-        exit()
-    try:
-        accounts_to_pay = int(input("How many accounts do you have to pay today? "))
-    except:
-        print(bcolors.FAIL + 'ERROR. YOU MUST ENTER AN INTEGER.\nPLEASE RE-RUN THE PROGRAM' + bcolors.ENDC)
-        exit()
+    while True:
+        try:
+            balance_in_checking = float(input("How much money do we have to work with? (Usually the money in your checking)\nAnswer in dollars and cents: "))
+            break
+        except:
+            print(bcolors.FAIL + 'ERROR. YOU MUST ENTER THE VALUE IN DOLLARS AND CENTS!' + bcolors.ENDC)
+    while True:
+        try:
+            accounts_to_pay = int(input("How many accounts do you have to pay today? "))
+            break
+        except:
+            print(bcolors.FAIL + 'ERROR. YOU MUST ENTER AN INTEGER!' + bcolors.ENDC)
 
 def dictionary_work():
     # calling the global variables
@@ -41,16 +43,18 @@ def dictionary_work():
     for i in range(len(num_of_accounts)):
         ticker += 1
         names = str(input(f'Please name account {ticker} '))
-        try:
-            balances = float(input(f"Please enter the " + bcolors.BOLD + "balance" + bcolors.ENDC +  f" of " + bcolors.BOLD + f'{names}' + bcolors.ENDC + " in dollars and cents: "))
-        except:
-            print(bcolors.FAIL + "INVALID INPUT.\nPLEASE RE-RUN THE PROGRAM" + bcolors.ENDC)
-            exit()
-        try:
-            min_payment = float(input(f"What is the " + bcolors.BOLD + "minimum amount owed" + bcolors.ENDC + f" on account: " + bcolors.BOLD +  f'{names} ' + bcolors.ENDC))
-        except:
-            print(bcolors.FAIL + "INVALID INPUT.\nPLEASE RE-RUN THE PROGRAM" + bcolors.ENDC)
-            exit()
+        while True:
+            try:
+                balances = float(input(f"Please enter the " + bcolors.BOLD + "balance" + bcolors.ENDC +  f" of " + bcolors.BOLD + f'{names}' + bcolors.ENDC + " in dollars and cents: "))
+                break
+            except:
+                print(bcolors.FAIL + "INVALID INPUT." + bcolors.ENDC)
+        while True:
+            try:
+                min_payment = float(input(f"What is the " + bcolors.BOLD + "minimum amount owed" + bcolors.ENDC + f" on account: " + bcolors.BOLD +  f'{names} ' + bcolors.ENDC))
+                break
+            except:
+                print(bcolors.FAIL + "INVALID INPUT." + bcolors.ENDC)
         
         accounts_and_balances[names] = balances
         accounts_min_payments[names] = min_payment
@@ -73,10 +77,12 @@ def dictionary_work():
     print('If you payed ' + bcolors.BOLD + 'ONLY ' + bcolors.ENDC + 'The minimum amount, your account would have a final balance of: ' + bcolors.BOLD + f'{if_payed_min}' + bcolors.ENDC)
     for i,j in accounts_and_balances.items():
         print('You owe: ' + bcolors.BOLD + f'${round(j,2)}' + bcolors.ENDC + ' on account: ' + bcolors.BOLD + f'{i}' + bcolors.ENDC)
-        try:
-            payment = float(input('How much would you like to pay? '))
-        except: 
-            print(bcolors.FAIL + "INVALID INPUT, PLEASE RE-RUN THE PROGRAM" + bcolors.ENDC)
+        while True:
+            try:
+                payment = float(input('How much would you like to pay? '))
+                break
+            except: 
+                print(bcolors.FAIL + "INVALID INPUT!" + bcolors.ENDC)
         balance_in_checking -= payment
         sub3 = Calculator(j, payment)
         account_balance = sub3.subtract()
