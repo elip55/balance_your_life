@@ -84,5 +84,5 @@ def let_us_pay(v1, v2):
         second_final_list_of_destiny.append(i)
     val3 = LetsWork(second_final_list_of_destiny, final_list_of_destiny, None)
     dictionary_of_destiny = val3.make_it_happen_boss()
-    ran_out_of_names = LetsWork(checking, dictionary_of_destiny, payment)
-    solution_of_destiny = ran_out_of_names.excel_is_for_nerds()
+    solution_of_destiny = LetsWork(checking, dictionary_of_destiny, payment)
+    solution_of_destiny.excel_is_for_nerds()

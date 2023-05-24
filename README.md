@@ -1,6 +1,5 @@
 # balance_your_life
-A program to help balance your checkbook
 
-I call the program "Balance your life", to help balance your checking and bills
+I found myself doing math on a paper one day and thought "wait a second...i know how to code"
 
-Simply add the amount you have to work with (usually checking), and the program will walk you through the rest
+Super simple program to help me do what i do with a pencil and paper every month. 
