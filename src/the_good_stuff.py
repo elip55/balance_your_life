@@ -8,7 +8,7 @@ class LetsWork:
         self.l2 = arr2
         self.ex = extra
         
-    def make_it_happen_boss(self):
+    def making_dicts(self):
         new_dict = dict(zip(self.l1, self.l2))
         return new_dict
 
@@ -44,7 +44,7 @@ def accounts_and_balances():
         balances = float(input(f'What is the balance of {i}? '))
         balance.append(balances)
     v1 = LetsWork(names, balance, None)
-    solution = v1.make_it_happen_boss()
+    solution = v1.making_dicts()
     return solution
 
 def accounts_and_min_payments(balance_dictionary):
@@ -55,7 +55,7 @@ def accounts_and_min_payments(balance_dictionary):
         min_payment.append(payment)
         names.append(i)
     v1 = LetsWork(names, min_payment, None)
-    solution = v1.make_it_happen_boss()
+    solution = v1.making_dicts()
     return solution
 
 def let_us_pay(v1, v2):
@@ -83,6 +83,6 @@ def let_us_pay(v1, v2):
     for i in v1:
         second_final_list_of_destiny.append(i)
     val3 = LetsWork(second_final_list_of_destiny, final_list_of_destiny, None)
-    dictionary_of_destiny = val3.make_it_happen_boss()
+    dictionary_of_destiny = val3.making_dicts()
     solution_of_destiny = LetsWork(checking, dictionary_of_destiny, payment)
     solution_of_destiny.excel_is_for_nerds()
