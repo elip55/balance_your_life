@@ -23,7 +23,7 @@ class BalanceLife:
         new_dict = dict(zip(self.l1, self.l2))
         return new_dict
 
-    def easy_street(self):
+    def easy_street(self): # bad name, this just subracts lol
         return self.l1 - self.l2
             
     def excel_is_for_nerds(self): # where l1 is None, l2 is the csv_dict, and extra is checking
@@ -45,8 +45,8 @@ def gather_data(): # gather accounts, balances, and min payment due
         names = input(f"Please input the name of account {i+1}: ")
         accounts.append(names)
     for i in accounts:
-        balance = float(input(f'Please input the total amount you owe on account: {i} '))
-        min_payment = float(input(f'Please input the minimum payment due on account: {i} '))
+        balance = float(input('Please input the ' + bcolors.OKBLUE + 'TOTAL AMOUNT YOU OWE ' + bcolors.ENDC + f'on account: {i} '))
+        min_payment = float(input('Please input the ' + bcolors.FAIL + 'MINIMUM PAYMENT DUE ' + bcolors.ENDC + f'on account: {i} '))
         balances.append(balance)
         min_payments_due.append(min_payment)
     arrays = BalanceLife(balances, min_payments_due, None)
@@ -59,7 +59,7 @@ def let_us_pay(checking, account_names, balance_min_dict): # bring names, balanc
     t1 = 0
     payment = []
     for i, j in balance_min_dict.items(): # get payment info
-        print(f'For account ' + bcolors.BOLD + f'{account_names[t1]},' + bcolors.ENDC + 'you have a balance of ' + bcolors.BOLD + f'{i}, ' + bcolors.ENDC + 'and a minimum payment of ' + bcolors.BOLD + f'{j}.' + bcolors.ENDC)
+        print(f'For account ' + bcolors.BOLD + f'{account_names[t1]},' + bcolors.ENDC + 'you have a balance of ' + bcolors.OKBLUE + f'{i}, ' + bcolors.ENDC + 'and a minimum payment of ' + bcolors.FAIL + f'{j}.' + bcolors.ENDC)
         t1 += 1
         payments = float(input('How much would you like to pay today? '))
         checking -= payments
