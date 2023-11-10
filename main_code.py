@@ -79,12 +79,17 @@ def let_us_pay(checking, account_names, balance_min_dict): # bring names, balanc
     f = BalanceLife(None, csv_dict, checking)
     f.excel_is_for_nerds()
 
+ticker = 0
 while True:
     try:
         checking = float(input('How much money do we have to work with? '))
         break
     except:
-        print(bcolors.FAIL + 'YOU HAVE FAILED A SIMPLE TASK, PAY ATTENTION AND INPUT DOLLARS AND CENTS!!' + bcolors.ENDC) 
+        print(bcolors.FAIL + 'YOU HAVE FAILED A SIMPLE TASK, PAY ATTENTION AND INPUT DOLLARS AND CENTS!!' + bcolors.ENDC)
+        ticker += 1
+        if ticker > 3:
+            print(bcolors.FAIL + 'YOU MUST BE CONFUSED, PLEASE RUN THIS PROGRAM AGAIN!' + bcolors.ENDC)
+            exit()
 
 names, balances = gather_data()
 let_us_pay(checking, names, balances)
