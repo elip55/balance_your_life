@@ -40,7 +40,17 @@ def gather_data(): # gather accounts, balances, and min payment due
     balances = []
     min_payments_due = []
 
-    num_of_accounts = int(input("How many accounts do you have to pay today? "))
+    ticker2 = 0
+    while True:
+        try:
+            num_of_accounts = int(input("How many accounts do you have to pay today? "))
+            break
+        except:
+            print(bcolors.FAIL + 'YOU HAVE FAILED A SIMPLE TASK, PAY ATTENTION AND INPUT DOLLARS AND CENTS!!' + bcolors.ENDC)
+            ticker2 += 1
+            if ticker2 > 3:
+                print(bcolors.FAIL + 'YOU MUST BE CONFUSED, PLEASE RUN THIS PROGRAM AGAIN!' + bcolors.ENDC)
+                exit()
     for i in range(num_of_accounts):
         names = input(f"Please input the name of account {i+1}: ")
         accounts.append(names)
