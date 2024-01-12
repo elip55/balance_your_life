@@ -61,10 +61,10 @@ def gather_data(v): # gather account names, balances, and min payment due
                 account_name = input(f'Please input the name of account {i+1}: ')
                 break
             except:
-                print('YOU HAVE FAILED A SIMPLE TASK, PAY ATTENTION AND INPUT DOLLARS AND CENTS!!')
+                print(bcolors.FAIL + 'YOU HAVE FAILED A SIMPLE TASK, PAY ATTENTION AND INPUT DOLLARS AND CENTS!!' + bcolors.ENDC)
                 ticker += 1
                 if ticker > 3:
-                    print('YOU MUST BE CONFUSED, PLEASE RUN THIS PROGRAM AGAIN!')
+                    print(bcolors.FAIL + 'YOU MUST BE CONFUSED, PLEASE RUN THIS PROGRAM AGAIN!' + bcolors.ENDC)
                     exit()
         account_names.append(account_name)
     
@@ -75,10 +75,10 @@ def gather_data(v): # gather account names, balances, and min payment due
                 balance = float(input(f'Please input the balance of account: {i} '))
                 break
             except:
-                print('YOU HAVE FAILED A SIMPLE TASK, PAY ATTENTION AND INPUT DOLLARS AND CENTS!!')
+                print(bcolors.FAIL + 'YOU HAVE FAILED A SIMPLE TASK, PAY ATTENTION AND INPUT DOLLARS AND CENTS!!' + bcolors.ENDC)
                 ticker2 += 1
                 if ticker2 > 3:
-                    print('YOU MUST BE CONFUSED, PLEASE RUN THIS PROGRAM AGAIN!')
+                    print(bcolors.FAIL + 'YOU MUST BE CONFUSED, PLEASE RUN THIS PROGRAM AGAIN!' + bcolors.ENDC)
                     exit()
         ticker3 = 0
         while True:
@@ -86,10 +86,10 @@ def gather_data(v): # gather account names, balances, and min payment due
                 minimum_payment = float(input(f'Please input the minimum amount owed of account: {i} '))
                 break
             except:
-                print('YOU HAVE FAILED A SIMPLE TASK, PAY ATTENTION AND INPUT DOLLARS AND CENTS!!')
+                print(bcolors.FAIL + 'YOU HAVE FAILED A SIMPLE TASK, PAY ATTENTION AND INPUT DOLLARS AND CENTS!!' + bcolors.ENDC)
                 ticker3 += 1
                 if ticker3 > 3:
-                    print('YOU MUST BE CONFUSED, PLEASE RUN THIS PROGRAM AGAIN!')
+                    print(bcolors.FAIL + 'YOU MUST BE CONFUSED, PLEASE RUN THIS PROGRAM AGAIN!' + bcolors.ENDC)
                     exit()
         
         accounts_balances_min[i] = [balance, minimum_payment]
@@ -101,8 +101,18 @@ def payments(checking, alldict):
     payments = []
     account_payment_balance = {}
     for i,j in alldict.items():
-        print(f'For account: {i}\nYou have a balance of: {j[0]}\nAnd a minimum payment of {j[1]}.')
-        payment = float(input('How much would you like to pay today? '))
+        print(f'For account:' + bcolors.BOLD + f'{i}\n' + bcolors.ENDC + 'You have a balance of: ' + bcolors.BOLD + f'{j[0]}\n' + bcolors.ENDC + 'And a minimum payment of: ' + bcolors.BOLD + f'{j[1]}.' + bcolors.ENDC)
+        ticker = 0
+        while True:
+            try:
+                payment = float(input('How much would you like to pay today? '))
+                break
+            except:
+                print(bcolors.FAIL + 'YOU HAVE FAILED A SIMPLE TASK, PAY ATTENTION AND INPUT DOLLARS AND CENTS!!' + bcolors.ENDC)
+                ticker += 1
+                if ticker > 3:
+                    print(bcolors.FAIL + 'YOU MUST BE CONFUSED, PLEASE RUN THIS PROGRAM AGAIN!' + bcolors.ENDC)
+                    exit()
         new_balance = j[0] - payment
 
         payments.append(payment)
