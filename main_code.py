@@ -72,7 +72,7 @@ def gather_data(v): # gather account names, balances, and min payment due
         ticker2 = 0
         while True:
             try:
-                balance = float(input(f'Please input the balance of account: {i} '))
+                balance = float(input(f'Please input the balance of account:' + bcolors.OKBLUE +  f' {i} ' + bcolors.ENDC))
                 break
             except:
                 print(bcolors.FAIL + 'YOU HAVE FAILED A SIMPLE TASK, PAY ATTENTION AND INPUT DOLLARS AND CENTS!!' + bcolors.ENDC)
@@ -83,7 +83,7 @@ def gather_data(v): # gather account names, balances, and min payment due
         ticker3 = 0
         while True:
             try:
-                minimum_payment = float(input(f'Please input the minimum amount owed of account: {i} '))
+                minimum_payment = float(input(f'Please input the minimum amount owed of account:' + bcolors.OKBLUE + f' {i} ' + bcolors.ENDC))
                 break
             except:
                 print(bcolors.FAIL + 'YOU HAVE FAILED A SIMPLE TASK, PAY ATTENTION AND INPUT DOLLARS AND CENTS!!' + bcolors.ENDC)
@@ -101,7 +101,7 @@ def payments(checking, alldict):
     payments = []
     account_payment_balance = {}
     for i,j in alldict.items():
-        print(f'For account:' + bcolors.BOLD + f'{i}\n' + bcolors.ENDC + 'You have a balance of: ' + bcolors.BOLD + f'{j[0]}\n' + bcolors.ENDC + 'And a minimum payment of: ' + bcolors.BOLD + f'{j[1]}.' + bcolors.ENDC)
+        print(f'For account:' + bcolors.BOLD + f' {i}\n ' + bcolors.ENDC + 'You have a balance of: ' + bcolors.BOLD + f'{j[0]}\n' + bcolors.ENDC + 'And a minimum payment of: ' + bcolors.FAIL + f'{j[1]}.' + bcolors.ENDC)
         ticker = 0
         while True:
             try:
