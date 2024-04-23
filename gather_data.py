@@ -1,15 +1,18 @@
 import csv
-
 def gather_all():
-    rows = []
     with open("reference.csv", 'r') as file:
-        header_reader = csv.reader(file)
-        header = next(header_reader) # header is the name of the accounts
-        rowboat = csv.reader(file, quoting=csv.QUOTE_NONNUMERIC)
-        for row in rowboat:
-            rows.append(row) # rows import data as floats using quote_nonnumeric
-    return header, rows
+        reader = csv.reader(file)
+        data = list(reader)
+    header = []
+    balances = []
+    min_payments = []
+    for i in range(len(data)):
+        data[i][1] = float(data[i][1])
+        data[i][2] = float(data[i][2])
+        header.append(data[i][0])
+        balances.append(data[i][1])
+        min_payments.append(data[i][2])
+    j = [balances,min_payments]
+    return header,j
 
 v,j = gather_all()
-
-print(v,j)
