@@ -7,7 +7,7 @@ def gather_all():
     return data
 
 k = gather_all()
-
+k.remove(k[0]) # the point of this element is to be more readable in csv format, not needed in code
 v = []
 a = []
 g = []
